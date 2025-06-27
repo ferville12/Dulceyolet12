@@ -2,18 +2,18 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Información de Miembros - Proyecto Dulceyolet</title>
+    <meta name="viewport" content="width=device-width"> <title>Información de Miembros - Proyecto Dulceyolet</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     
     <style>
+        /* (Tu CSS existente sin cambios) */
+        /* --- ESTILOS BASE (aplicados por defecto, luego sobrescritos por media queries) --- */
         html, body {
             height: 100%;
             margin: 0;
             padding: 0;
-            /* Se asegura de que no haya overflow: hidden; aquí */
             font-family: Arial, sans-serif;
             color: #333;
             line-height: 1.6;
@@ -23,23 +23,22 @@
             background-size: cover;
             background-attachment: fixed;
             background-position: center center;
+            overflow-x: hidden;
         }
 
+        /* --- Contenedor Principal (Layout de escritorio por defecto) --- */
         .main-layout-container {
             display: flex;
             gap: 20px;
             max-width: 1700px;
             margin: 40px auto;
-            height: calc(100% - 80px); /* Ajusta la altura del contenedor principal */
+            height: calc(100% - 80px);
             align-items: stretch;
-            /* El contenedor principal debe ser transparente para que se vea el fondo */
-            background-color: transparent; 
+            background-color: transparent;
             box-shadow: none;
             padding: 0;
             border-radius: 0;
-            /* Si las columnas internas manejan su propio scroll, el principal no lo necesita. */
-            /* Si una columna crece mucho, el contenedor principal podría necesitar scroll. */
-            overflow: hidden; /* Oculta el scroll del contenedor principal si las columnas internas manejan su propio scroll */
+            overflow: hidden;
         }
 
         /* --- Estilos para el Cuadro de la Imagen (Columna Izquierda) --- */
@@ -57,14 +56,9 @@
             text-align: center;
             
             min-height: 100px;
-            height: 100%; /* Ocupa toda la altura disponible de su padre */
-            /* CAMBIO CLAVE: Añadir barra de desplazamiento vertical automática */
-            overflow-y: auto; 
-            overflow-x: hidden; /* Previene scroll horizontal si no se desea */
-            
-            position: static; 
-            top: auto;
-            align-self: auto;
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
         }
 
         .image-column-box h2 {
@@ -121,10 +115,8 @@
             box-shadow: none;
             
             min-height: 100px;
-            height: 100%; /* Ocupa toda la altura disponible de su padre */
-            /* CAMBIO CLAVE: Quitar la barra de desplazamiento de la columna derecha */
-            overflow: hidden; /* El contenido que se desborde se cortará */
-            /* Si prefieres que el contenido se "derrame" fuera de la caja sin scroll, usa overflow: visible; */
+            height: 100%;
+            overflow: hidden;
         }
 
         .members-column-box h1 {
@@ -136,12 +128,13 @@
             font-size: 2.5em;
         }
 
+        /* --- Estilos de las Tarjetas de Miembros --- */
         .member-card {
             border: 1px solid #ddd;
             border-radius: 8px;
             padding: 20px;
             margin-bottom: 25px;
-            background-color: #f9f9f9;
+            background-color: #F5F5DC;
             display: flex;
             align-items: flex-start;
             gap: 20px;
@@ -181,44 +174,83 @@
             color: #555;
         }
 
+        /* --- MEDIA QUERIES PARA ADAPTACIÓN A TELÉFONOS Y TABLETAS --- */
         @media (max-width: 992px) {
             .main-layout-container {
                 flex-direction: column;
                 max-width: 95%;
-                height: auto; 
-                margin: 10px auto; 
-                /* Se permite el scroll en el contenedor principal cuando las columnas se apilan */
-                overflow-y: auto; 
+                height: auto;
+                margin: 20px auto;
+                overflow-y: auto;
                 padding: 10px;
             }
 
             .image-column-box, .members-column-box {
-                width: 100%;
-                height: auto; 
-                /* En móvil, ambas columnas pueden necesitar scroll */
-                overflow-y: auto; 
+                width: auto;
+                height: auto;
+                padding: 15px;
+                overflow-y: auto;
+                overflow-x: hidden;
             }
             
             body {
-                overflow: auto;
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+
+            .image-column-box h2, .members-column-box h1 {
+                font-size: 2.2em;
+            }
+            .poem-text {
+                font-size: 1.05em;
+            }
+            .social-media-text {
+                font-size: 0.8em;
             }
 
             .member-card {
                 flex-direction: column;
                 align-items: center;
                 text-align: center;
+                padding: 15px;
             }
             .member-card img {
                 margin-bottom: 15px;
             }
+            .member-info h2 {
+                font-size: 1.6em;
+            }
+            .member-info p {
+                font-size: 0.95em;
+            }
         }
 
-        @media (max-width: 600px) {
-            body {
-                margin: 10px;
+        @media (max-width: 480px) {
+            .main-layout-container {
+                margin: 10px auto;
+                padding: 5px;
             }
             .image-column-box, .members-column-box {
-                padding: 15px;
+                padding: 10px;
+            }
+            .image-column-box h2, .members-column-box h1 {
+                font-size: 1.8em;
+            }
+            .poem-text {
+                font-size: 0.95em;
+            }
+            .member-card {
+                padding: 10px;
+            }
+            .member-card img {
+                width: 90px;
+                height: 90px;
+            }
+            .member-info h2 {
+                font-size: 1.4em;
+            }
+            .member-info p {
+                font-size: 0.9em;
             }
         }
     </style>
@@ -234,11 +266,16 @@
                 En El Junquito, donde el aire es fresco y la neblina abraza el paisaje, Nace un suspiro, un dulce embeleso, Con sabor a ensueño, sin igual "Dulceyolet"
             </p>
             <p class="poem-text">
-                De chocolate oscuro, o vainilla clara, Con merengue que el cielo parece tocar, Cada postre es una obra rara, Un arte que el alma viene a endulzarte. <br><br>
-                Asegúrate de que haya suficiente contenido aquí para que la barra de desplazamiento aparezca.
-                Puedes añadir más párrafos, líneas, o incluso imágenes si quieres forzar que aparezca.
+               De chocolate oscuro, o vainilla clara, Con merengue que el cielo parece tocar, Cada postre es una obra rara, Un arte que el alma viene a endulzarte. <br><br>
+                
+               Puedes añadir más párrafos, líneas, o incluso imágenes si quieres forzar que aparezca.
                 Cuanto más texto haya, más probable será que necesite un scroll.
                 <br><br> ¡Sigue añadiendo líneas para que se note el efecto!
+                <br><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                <br><br>
+                Más contenido para asegurar un buen desplazamiento.
+                <br><br>
+                Finalizando el texto de prueba.
             </p>
             <p class="social-media-text">
                 
@@ -297,6 +334,18 @@
                     <p><strong>Número de Teléfono:</strong> 04242064646</p>
                     <p><strong>Profesión:</strong> Técnico Superior en Informática</p>
                     <p><strong>Rol en Dulceyolet:</strong> Base de Datos y Documentación</p>
+                </div>
+            </div>
+            <div class="member-card">
+                <img src="https://i.imgur.com/p8jQDoK.jpg" alt="Foto de Nuevo Miembro">
+                <div class="member-info">
+                    <h2>Nuevo Miembro de Prueba</h2>
+                    <p><strong>Fecha de Nacimiento:</strong> 01/01/2000</p>
+                    <p><strong>Cédula:</strong> 99.999.999</p>
+                    <p><strong>Correo Electrónico:</strong> nuevo.miembro@ejemplo.com</p>
+                    <p><strong>Número de Teléfono:</strong> 01234567890</p>
+                    <p><strong>Profesión:</strong> Desarrollador Web</p>
+                    <p><strong>Rol en Dulceyolet:</strong> Soporte Técnico</p>
                 </div>
             </div>
         </div>
