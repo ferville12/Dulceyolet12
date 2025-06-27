@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información de Miembros - Proyecto Dulceyolet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            /* Se asegura de que no haya overflow: hidden; aquí */
+            font-family: Arial, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            background-image: url('https://i.imgur.com/Ab3U92D.jpeg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center center;
+        }
+
+        .main-layout-container {
+            display: flex;
+            gap: 20px;
+            max-width: 1700px;
+            margin: 40px auto;
+            height: calc(100% - 80px); /* Ajusta la altura del contenedor principal */
+            align-items: stretch;
+            /* El contenedor principal debe ser transparente para que se vea el fondo */
+            background-color: transparent; 
+            box-shadow: none;
+            padding: 0;
+            border-radius: 0;
+            /* Si las columnas internas manejan su propio scroll, el principal no lo necesita. */
+            /* Si una columna crece mucho, el contenedor principal podría necesitar scroll. */
+            overflow: hidden; /* Oculta el scroll del contenedor principal si las columnas internas manejan su propio scroll */
+        }
+
+        /* --- Estilos para el Cuadro de la Imagen (Columna Izquierda) --- */
+        .image-column-box {
+            flex: 1;
+            background-color: transparent;
+            border: none;
+            border-radius: 8px;
+            box-shadow: none;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            text-align: center;
+            
+            min-height: 100px;
+            height: 100%; /* Ocupa toda la altura disponible de su padre */
+            /* CAMBIO CLAVE: Añadir barra de desplazamiento vertical automática */
+            overflow-y: auto; 
+            overflow-x: hidden; /* Previene scroll horizontal si no se desea */
+            
+            position: static; 
+            top: auto;
+            align-self: auto;
+        }
+
+        .image-column-box h2 {
+            font-family: 'Great Vibes', cursive;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            margin-top: 0;
+            font-size: 2.8em;
+        }
+
+        .image-content-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+            min-height: 150px;
+        }
+
+        .image-column-box img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 5px;
+            display: block;
+        }
+
+        .poem-text {
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            text-align: center;
+            font-style: normal;
+            color: #2c3e50;
+            font-size: 1.15em;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .social-media-text {
+            text-align: center;
+            font-style: italic;
+            color: #777;
+            font-size: 0.85em;
+            margin-top: 0;
+        }
+
+        /* --- Estilos para el Cuadro de los Miembros (Columna Derecha) --- */
+        .members-column-box {
+            flex: 1;
+            background-color: transparent;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: none;
+            
+            min-height: 100px;
+            height: 100%; /* Ocupa toda la altura disponible de su padre */
+            /* CAMBIO CLAVE: Quitar la barra de desplazamiento de la columna derecha */
+            overflow: hidden; /* El contenido que se desborde se cortará */
+            /* Si prefieres que el contenido se "derrame" fuera de la caja sin scroll, usa overflow: visible; */
+        }
+
+        .members-column-box h1 {
+            font-family: 'Great Vibes', cursive;
+            color: #2c3e50;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+
+        .member-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            background-color: #f9f9f9;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            flex-direction: row;
+        }
+
+        .member-card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #3498db;
+            flex-shrink: 0;
+            align-self: flex-start;
+        }
+
+        .member-info {
+            flex-grow: 1;
+            align-self: flex-start;
+        }
+        .member-info h2 {
+            font-family: 'Great Vibes', cursive;
+            color: #3498db;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.8em;
+        }
+        .member-info p {
+            margin: 5px 0;
+            margin-bottom: 0;
+        }
+        .member-info p:last-child {
+            margin-bottom: 0;
+        }
+        .member-info strong {
+            color: #555;
+        }
+
+        @media (max-width: 992px) {
+            .main-layout-container {
+                flex-direction: column;
+                max-width: 95%;
+                height: auto; 
+                margin: 10px auto; 
+                /* Se permite el scroll en el contenedor principal cuando las columnas se apilan */
+                overflow-y: auto; 
+                padding: 10px;
+            }
+
+            .image-column-box, .members-column-box {
+                width: 100%;
+                height: auto; 
+                /* En móvil, ambas columnas pueden necesitar scroll */
+                overflow-y: auto; 
+            }
+            
+            body {
+                overflow: auto;
+            }
+
+            .member-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .member-card img {
+                margin-bottom: 15px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            body {
+                margin: 10px;
+            }
+            .image-column-box, .members-column-box {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-layout-container">
+        <div class="image-column-box">
+            <h2>Dulceyolet</h2>
+            <div class="image-content-wrapper">
+                <img src="https://i.imgur.com/MGNyWbP.jpg" alt="Logo de Dulceyolet">
+            </div>
+            <p class="poem-text">
+                En El Junquito, donde el aire es fresco y la neblina abraza el paisaje, Nace un suspiro, un dulce embeleso, Con sabor a ensueño, sin igual "Dulceyolet"
+            </p>
+            <p class="poem-text">
+                De chocolate oscuro, o vainilla clara, Con merengue que el cielo parece tocar, Cada postre es una obra rara, Un arte que el alma viene a endulzarte. <br><br>
+                Asegúrate de que haya suficiente contenido aquí para que la barra de desplazamiento aparezca.
+                Puedes añadir más párrafos, líneas, o incluso imágenes si quieres forzar que aparezca.
+                Cuanto más texto haya, más probable será que necesite un scroll.
+                <br><br> ¡Sigue añadiendo líneas para que se note el efecto!
+            </p>
+            <p class="social-media-text">
+                
+            </p>
+        </div>
+
+        <div class="members-column-box">
+            <h1>Información de los Miembros del Proyecto Dulceyolet</h1>
+
+            <div class="member-card">
+                <img src="https://i.imgur.com/oxQ7eEu.jpg" alt="Foto de Fernando Villegas">
+                <div class="member-info">
+                    <h2>Fernando Villegas</h2>
+                    <p><strong>Fecha de Nacimiento:</strong> 12/04/1992</p>
+                    <p><strong>Cédula:</strong> 20.129.712</p>
+                    <p><strong>Correo Electrónico:</strong> ferjoseville@gmail.com</p>
+                    <p><strong>Número de Teléfono:</strong> 04123759137</p>
+                    <p><strong>Profesión:</strong> Técnico Superior en Informática</p>
+                    <p><strong>Rol en Dulceyolet:</strong> Desarrollo y Diseño</p>
+                </div>
+            </div>
+
+            <div class="member-card">
+                <img src="https://i.imgur.com/p8jQDoK.jpg" alt="Foto de Raul Zavarce">
+                <div class="member-info">
+                    <h2>Raul Zavarce</h2>
+                    <p><strong>Fecha de Nacimiento:</strong> 01/02/1978</p>
+                    <p><strong>Cédula:</strong> 13.308.756</p>
+                    <p><strong>Correo Electrónico:</strong> razavarce@gmail.com</p>
+                    <p><strong>Número de Teléfono:</strong> 04142857181</p>
+                    <p><strong>Profesión:</strong> Técnico Superior en Informática</p>
+                    <p><strong>Rol en Dulceyolet:</strong> Desarrollo y Diseño</p>
+                </div>
+            </div>
+            
+            <div class="member-card">
+                <img src="https://i.imgur.com/RCbrJZQ.jpg" alt="Foto de Rober Lugo">
+                <div class="member-info">
+                    <h2>Rober Lugo</h2>
+                    <p><strong>Fecha de Nacimiento:</strong> 26/11/1982</p>
+                    <p><strong>Cédula:</strong> 16.357.005</p>
+                    <p><strong>Correo Electrónico:</strong> roberalexis@gmail.com</p>
+                    <p><strong>Número de Teléfono:</strong> 04142857181</p>
+                    <p><strong>Profesión:</strong> Técnico Superior en Informática</p>
+                    <p><strong>Rol en Dulceyolet:</strong> Base de Datos y Documentación</p>
+                </div>
+            </div>
+            
+            <div class="member-card">
+                <img src="https://i.imgur.com/X3506Sc.jpg" alt="Foto de Annie Aular">
+                <div class="member-info">
+                    <h2>Annie Aular</h2>
+                    <p><strong>Fecha de Nacimiento:</strong> 16/10/1988</p>
+                    <p><strong>Cédula:</strong> 18.271.471</p>
+                    <p><strong>Correo Electrónico:</strong> annieaular18@gmail.com</p>
+                    <p><strong>Número de Teléfono:</strong> 04242064646</p>
+                    <p><strong>Profesión:</strong> Técnico Superior en Informática</p>
+                    <p><strong>Rol en Dulceyolet:</strong> Base de Datos y Documentación</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
