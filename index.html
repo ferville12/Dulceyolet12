@@ -76,6 +76,7 @@
             align-items: center;
             flex-grow: 1;
             min-height: 150px;
+            margin-bottom: 0px; /* Ajuste opcional del margen inferior */
         }
 
         .image-column-box img {
@@ -86,6 +87,33 @@
             display: block;
         }
 
+        /* Estilos del reloj */
+        #clock-container {
+            margin-top: 20px; /* Espacio entre el logo y el reloj */
+            margin-bottom: 20px; /* Espacio entre el reloj y el poema */
+            font-family: 'Arial', sans-serif;
+            color: #2c3e50;
+            background-color: rgba(255, 255, 255, 0.7); /* Fondo semi-transparente para visibilidad */
+            padding: 10px 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            font-size: 1.1em;
+            text-align: center;
+        }
+
+        #clock-container #time {
+            font-size: 1.8em;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        #clock-container #date {
+            font-size: 1em;
+            display: block;
+        }
+
+
         .poem-text {
             font-family: Arial, sans-serif;
             font-weight: bold;
@@ -93,9 +121,13 @@
             font-style: normal;
             color: #2c3e50;
             font-size: 1.15em;
-            margin-top: 20px;
             margin-bottom: 20px;
             line-height: 1.5;
+        }
+
+        .poem-text:first-of-type { /* Aplica solo al primer poema */
+            margin-top: 5px; /* Reducimos el margen superior */
+            margin-bottom: 15px; /* Ajustamos el margen inferior */
         }
 
         .social-media-text {
@@ -241,6 +273,16 @@
             .social-media-text {
                 font-size: 0.8em;
             }
+            #clock-container {
+                font-size: 1em;
+                padding: 8px 12px;
+            }
+            #clock-container #time {
+                font-size: 1.5em;
+            }
+            #clock-container #date {
+                font-size: 0.9em;
+            }
 
             .member-card {
                 flex-direction: column;
@@ -273,6 +315,16 @@
             .poem-text {
                 font-size: 0.95em;
             }
+            #clock-container {
+                font-size: 0.9em;
+                padding: 6px 10px;
+            }
+            #clock-container #time {
+                font-size: 1.3em;
+            }
+            #clock-container #date {
+                font-size: 0.8em;
+            }
             .member-card {
                 padding: 10px;
             }
@@ -296,6 +348,12 @@
             <div class="image-content-wrapper">
                 <img src="https://i.imgur.com/MGNyWbP.jpg" alt="Logo de Dulceyolet">
             </div>
+
+            <div id="clock-container">
+                <span id="time"></span>
+                <span id="date"></span>
+            </div>
+            
             <p class="poem-text">
                 En El Junquito, donde el aire es fresco y la neblina abraza el paisaje, Nace un suspiro, un dulce embeleso, Con sabor a ensueño, sin igual "Dulceyolet"
             </p>
@@ -367,8 +425,24 @@
             </div>
         </div>
     </div>
-</body>
-</html>
-</html>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+            const optionsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+
+            const timeString = now.toLocaleTimeString('es-VE', optionsTime); // Formato de hora de Venezuela
+            const dateString = now.toLocaleDateString('es-VE', optionsDate); // Formato de fecha de Venezuela
+
+            document.getElementById('time').textContent = timeString;
+            document.getElementById('date').textContent = dateString;
+        }
+
+        // Actualiza el reloj cada segundo
+        setInterval(updateClock, 1000);
+        // Llama a la función una vez al cargar la página para mostrar el reloj de inmediato
+        updateClock();
+    </script>
 </body>
 </html>
