@@ -2,13 +2,13 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width"> <title>Información de Miembros - Proyecto Dulceyolet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información de Miembros - Proyecto Dulceyolet</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     
     <style>
-        /* (Tu CSS existente sin cambios) */
         /* --- ESTILOS BASE (aplicados por defecto, luego sobrescritos por media queries) --- */
         html, body {
             height: 100%;
@@ -23,7 +23,8 @@
             background-size: cover;
             background-attachment: fixed;
             background-position: center center;
-            overflow-x: hidden;
+            overflow-x: hidden; /* Evita la barra de desplazamiento horizontal en el body */
+            overflow-y: auto; /* Permite la barra de desplazamiento vertical en el body si el contenido excede la altura */
         }
 
         /* --- Contenedor Principal (Layout de escritorio por defecto) --- */
@@ -32,13 +33,13 @@
             gap: 20px;
             max-width: 1700px;
             margin: 40px auto;
-            height: calc(100% - 80px);
+            height: calc(100% - 80px); /* Ajusta la altura para dejar espacio al margen */
             align-items: stretch;
             background-color: transparent;
             box-shadow: none;
             padding: 0;
             border-radius: 0;
-            overflow: hidden;
+            overflow: hidden; /* Evita barras de desplazamiento innecesarias en el contenedor principal */
         }
 
         /* --- Estilos para el Cuadro de la Imagen (Columna Izquierda) --- */
@@ -54,10 +55,9 @@
             justify-content: flex-start;
             align-items: center;
             text-align: center;
-            
             min-height: 100px;
             height: 100%;
-            overflow-y: auto;
+            overflow-y: auto; /* Barra de desplazamiento para el contenido de la imagen si es necesario */
             overflow-x: hidden;
         }
 
@@ -113,10 +113,11 @@
             padding: 30px;
             border-radius: 8px;
             box-shadow: none;
-            
             min-height: 100px;
-            height: 100%;
-            overflow: hidden;
+            height: 100%; /* Ocupa la altura disponible */
+            overflow-y: auto; /* ¡Aquí se añade la barra de desplazamiento vertical! */
+            overflow-x: hidden; /* Evita la barra de desplazamiento horizontal */
+            -webkit-overflow-scrolling: touch; /* Suaviza el desplazamiento en iOS */
         }
 
         .members-column-box h1 {
@@ -174,27 +175,38 @@
             color: #555;
         }
 
+        /* Estilos para los enlaces de LinkedIn */
+        .member-info a {
+            color: #0077B5; /* Color de LinkedIn */
+            text-decoration: none; /* Quita el subrayado predeterminado */
+            font-weight: bold; /* Hace el texto un poco más notorio */
+        }
+
+        .member-info a:hover {
+            text-decoration: underline; /* Subraya al pasar el mouse */
+        }
+
         /* --- MEDIA QUERIES PARA ADAPTACIÓN A TELÉFONOS Y TABLETAS --- */
         @media (max-width: 992px) {
             .main-layout-container {
                 flex-direction: column;
                 max-width: 95%;
-                height: auto;
+                height: auto; /* Permite que el contenedor crezca según el contenido */
                 margin: 20px auto;
-                overflow-y: auto;
+                overflow-y: visible; /* Permite que el contenido se desborde al body si es necesario */
                 padding: 10px;
             }
 
             .image-column-box, .members-column-box {
                 width: auto;
-                height: auto;
+                height: auto; /* Permite que las columnas crezcan según el contenido */
                 padding: 15px;
-                overflow-y: auto;
+                overflow-y: visible; /* Permite que el contenido se desborde al contenedor padre */
                 overflow-x: hidden;
             }
             
             body {
-                overflow-y: auto;
+                overflow-y: auto; /* Asegura que el body tenga barra de desplazamiento si el contenido es largo */
                 overflow-x: hidden;
             }
 
@@ -266,12 +278,7 @@
                 En El Junquito, donde el aire es fresco y la neblina abraza el paisaje, Nace un suspiro, un dulce embeleso, Con sabor a ensueño, sin igual "Dulceyolet"
             </p>
             <p class="poem-text">
-               De chocolate oscuro, o vainilla clara, Con merengue que el cielo parece tocar, Cada postre es una obra rara, Un arte que el alma viene a endulzarte. <br><br>
-                
-               
-                
-             
-                
+                De chocolate oscuro, o vainilla clara, Con merengue que el cielo parece tocar, Cada postre es una obra rara, Un arte que el alma viene a endulzarte. <br><br>
             </p>
             <p class="social-media-text">
                 
@@ -291,6 +298,7 @@
                     <p><strong>Número de Teléfono:</strong> 04123759137</p>
                     <p><strong>Profesión:</strong> Técnico Superior en Informática</p>
                     <p><strong>Rol en Dulceyolet:</strong> Desarrollo y Diseño</p>
+                    <p><strong>Red Social:</strong> <a href="URL_DE_LINKEDIN_FERNANDO" target="_blank" rel="noopener noreferrer">LinkedIn de Fernando</a></p>
                 </div>
             </div>
 
@@ -304,6 +312,7 @@
                     <p><strong>Número de Teléfono:</strong> 04142857181</p>
                     <p><strong>Profesión:</strong> Técnico Superior en Informática</p>
                     <p><strong>Rol en Dulceyolet:</strong> Desarrollo y Diseño</p>
+                    <p><strong>Red Social:</strong> <a href="https://www.linkedin.com/in/raul-zavarce-090863128" target="_blank" rel="noopener noreferrer">LinkedIn de Raul</a></p>
                 </div>
             </div>
             
@@ -317,6 +326,7 @@
                     <p><strong>Número de Teléfono:</strong> 04142857181</p>
                     <p><strong>Profesión:</strong> Técnico Superior en Informática</p>
                     <p><strong>Rol en Dulceyolet:</strong> Base de Datos y Documentación</p>
+                    <p><strong>Red Social:</strong> <a href="URL_DE_LINKEDIN_ROBER" target="_blank" rel="noopener noreferrer">LinkedIn de Rober</a></p>
                 </div>
             </div>
             
@@ -330,14 +340,13 @@
                     <p><strong>Número de Teléfono:</strong> 04242064646</p>
                     <p><strong>Profesión:</strong> Técnico Superior en Informática</p>
                     <p><strong>Rol en Dulceyolet:</strong> Base de Datos y Documentación</p>
-                </div>
-            </div>
-           
+                    <p><strong>Red Social:</strong> <a href="https://www.linkedin.com/in/annie-aular-sandoval-670489179" target="_blank" rel="noopener noreferrer">LinkedIn de Annie</a></p>
                 </div>
             </div>
         </div>
     </div>
 </body>
+</html>
 </html>
 </body>
 </html>
