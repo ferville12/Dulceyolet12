@@ -3,464 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Información de Miembros - Proyecto Dulceyolet</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-    
-    <style>
-        /* --- ESTILOS BASE (aplicados por defecto, luego sobrescritos por media queries) --- */
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            color: #333;
-            line-height: 1.6;
-            background-color: #f4f4f4;
-            background-image: url('https://i.imgur.com/Ab3U92D.jpeg');
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-attachment: fixed;
-            background-position: center center;
-            overflow-x: hidden; /* Evita la barra de desplazamiento horizontal en el body */
-            overflow-y: auto; /* Permite la barra de desplazamiento vertical en el body si el contenido excede la altura */
-        }
-
-        /* --- Contenedor Principal (Layout de escritorio por defecto) --- */
-        .main-layout-container {
-            display: flex;
-            gap: 20px;
-            max-width: 1700px;
-            margin: 40px auto;
-            height: calc(100% - 80px); /* Ajusta la altura para dejar espacio al margen */
-            align-items: stretch;
-            background-color: transparent;
-            box-shadow: none;
-            padding: 0;
-            border-radius: 0;
-            overflow: hidden; /* Evita barras de desplazamiento innecesarias en el contenedor principal */
-        }
-
-        /* --- Estilos para el Cuadro de la Imagen (Columna Izquierda) --- */
-        .image-column-box {
-            flex: 1;
-            background-color: transparent;
-            border: none;
-            border-radius: 8px;
-            box-shadow: none;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-            text-align: center;
-            min-height: 100px;
-            height: 100%;
-            overflow-y: auto; /* Barra de desplazamiento para el contenido de la imagen si es necesario */
-            overflow-x: hidden;
-        }
-
-        .image-column-box h2 {
-            font-family: 'Great Vibes', cursive;
-            color: #2c3e50;
-            margin-bottom: 20px;
-            margin-top: 0;
-            font-size: 2.8em;
-        }
-
-        .image-content-wrapper {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-grow: 1;
-            min-height: 150px;
-            margin-bottom: 0px; /* Ajuste opcional del margen inferior */
-        }
-
-        .image-column-box img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            border-radius: 5px;
-            display: block;
-        }
-
-        /* Estilos del reloj */
-        #clock-container {
-            margin-top: 20px; /* Espacio entre el logo y el reloj */
-            margin-bottom: 20px; /* Espacio entre el reloj y el poema */
-            font-family: 'Arial', sans-serif;
-            color: #2c3e50;
-            background-color: rgba(255, 255, 255, 0.7); /* Fondo semi-transparente para visibilidad */
-            padding: 10px 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            font-size: 1.1em;
-            text-align: center;
-        }
-
-        #clock-container #time {
-            font-size: 1.8em;
-            font-weight: bold;
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        #clock-container #date {
-            font-size: 1em;
-            display: block;
-        }
-
-
-        .poem-text {
-            font-family: Arial, sans-serif;
-            font-weight: bold;
-            text-align: center;
-            font-style: normal;
-            color: #2c3e50;
-            font-size: 1.15em;
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
-
-        .poem-text:first-of-type { /* Aplica solo al primer poema */
-            margin-top: 5px; /* Reducimos el margen superior */
-            margin-bottom: 15px; /* Ajustamos el margen inferior */
-        }
-
-        .social-media-text {
-            text-align: center;
-            font-style: italic;
-            color: #777;
-            font-size: 0.85em;
-            margin-top: 0;
-        }
-
-        /* --- Estilos para el Cuadro de los Miembros (Columna Derecha) --- */
-        .members-column-box {
-            flex: 1;
-            background-color: transparent;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: none;
-            min-height: 100px;
-            height: 100%; /* Ocupa la altura disponible */
-            overflow-y: auto; /* ¡Aquí se añade la barra de desplazamiento vertical! */
-            overflow-x: hidden; /* Evita la barra de desplazamiento horizontal */
-            -webkit-overflow-scrolling: touch; /* Suaviza el desplazamiento en iOS */
-        }
-
-        .members-column-box h1 {
-            font-family: 'Great Vibes', cursive;
-            color: #2c3e50;
-            text-align: center;
-            margin-top: 0;
-            margin-bottom: 30px;
-            font-size: 2.5em;
-        }
-
-        /* --- Estilos de las Tarjetas de Miembros --- */
-        .member-card {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 25px;
-            background-color: #F5F5DC;
-            display: flex;
-            align-items: flex-start;
-            gap: 20px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            flex-direction: row;
-        }
-
-        .member-card img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #3498db;
-            flex-shrink: 0;
-            align-self: flex-start;
-        }
-
-        .member-info {
-            flex-grow: 1;
-            align-self: flex-start;
-        }
-        .member-info h2 {
-            font-family: 'Great Vibes', cursive;
-            color: #3498db;
-            margin-top: 0;
-            margin-bottom: 10px;
-            font-size: 1.8em;
-        }
-        .member-info p {
-            margin: 5px 0;
-            margin-bottom: 0;
-        }
-        .member-info p:last-child {
-            margin-bottom: 0;
-        }
-        .member-info strong {
-            color: #555;
-        }
-
-        /* Estilos para los enlaces de LinkedIn */
-        .member-info a.linkedin-link { /* Clase específica para enlaces de LinkedIn */
-            color: #0077B5; /* Color de LinkedIn */
-            text-decoration: none; /* Quita el subrayado predeterminado */
-            font-weight: bold; /* Hace el texto un poco más notorio */
-        }
-
-        .member-info a.linkedin-link:hover {
-            text-decoration: underline; /* Subraya al pasar el mouse */
-        }
-
-        /* Estilos para los enlaces telefónicos */
-        .member-info a.phone-link {
-            color: #28a745; /* Un color verde para enlaces telefónicos */
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .member-info a.phone-link:hover {
-            text-decoration: underline;
-        }
-
-        /* Estilos para los enlaces de correo electrónico */
-        .member-info a.email-link {
-            color: #dc3545; /* Un color rojo para enlaces de correo */
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .member-info a.email-link:hover {
-            text-decoration: underline;
-        }
-
-        /* --- MEDIA QUERIES PARA ADAPTACIÓN A TELÉFONOS Y TABLETAS --- */
-        @media (max-width: 992px) {
-            .main-layout-container {
-                flex-direction: column;
-                max-width: 95%;
-                height: auto; /* Permite que el contenedor crezca según el contenido */
-                margin: 20px auto;
-                overflow-y: visible; /* Permite que el contenido se desborde al body si es necesario */
-                padding: 10px;
-            }
-
-            .image-column-box, .members-column-box {
-                width: auto;
-                height: auto; /* Permite que las columnas crezcan según el contenido */
-                padding: 15px;
-                overflow-y: visible; /* Permite que el contenido se desborde al contenedor padre */
-                overflow-x: hidden;
-            }
-            
-            body {
-                overflow-y: auto; /* Asegura que el body tenga barra de desplazamiento si el contenido es largo */
-                overflow-x: hidden;
-            }
-
-            .image-column-box h2, .members-column-box h1 {
-                font-size: 2.2em;
-            }
-            .poem-text {
-                font-size: 1.05em;
-            }
-            .social-media-text {
-                font-size: 0.8em;
-            }
-            #clock-container {
-                font-size: 1em;
-                padding: 8px 12px;
-            }
-            #clock-container #time {
-                font-size: 1.5em;
-            }
-            #clock-container #date {
-                font-size: 0.9em;
-            }
-
-            .member-card {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-                padding: 15px;
-            }
-            .member-card img {
-                margin-bottom: 15px;
-            }
-            .member-info h2 {
-                font-size: 1.6em;
-            }
-            .member-info p {
-                font-size: 0.95em;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .main-layout-container {
-                margin: 10px auto;
-                padding: 5px;
-            }
-            .image-column-box, .members-column-box {
-                padding: 10px;
-            }
-            .image-column-box h2, .members-column-box h1 {
-                font-size: 1.8em;
-            }
-            .poem-text {
-                font-size: 0.95em;
-            }
-            #clock-container {
-                font-size: 0.9em;
-                padding: 6px 10px;
-            }
-            #clock-container #time {
-                font-size: 1.3em;
-            }
-            #clock-container #date {
-                font-size: 0.8em;
-            }
-            .member-card {
-                padding: 10px;
-            }
-            .member-card img {
-                width: 90px;
-                height: 90px;
-            }
-            .member-info h2 {
-                font-size: 1.4em;
-            }
-            .member-info p {
-                font-size: 0.9em;
-            }
-        }
-    </style>
+    <title>Soporte SSCC Innovation</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="main-layout-container">
-        <div class="image-column-box">
-            <h2>Dulceyolet</h2>
-            <div class="image-content-wrapper">
-                <img src="https://i.imgur.com/MGNyWbP.jpg" alt="Logo de Dulceyolet">
-            </div>
 
-            <div id="clock-container">
-                <span id="time"></span>
-                <span id="date"></span>
+<div id="login-screen">
+    <h1 class="login-title">Soporte SSCC Innovation</h1>
+    <div class="login-container">
+        <h2>Iniciar Sesión</h2>
+        <form id="login-form">
+            <input type="text" id="username" placeholder="Usuario" autocomplete="off" required>
+            <div class="password-container">
+                <input type="password" id="password" placeholder="Contraseña" required>
+                <span id="toggle-password-icon" class="toggle-password">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                </span>
             </div>
-            
-            <p class="poem-text">
-                En El Junquito, donde el aire es fresco y la neblina abraza el paisaje, Nace un suspiro, un dulce embeleso, Con sabor a ensueño, sin igual "Dulceyolet"
-            </p>
-            <p class="poem-text">
-                De chocolate oscuro, o vainilla clara, Con merengue que el cielo parece tocar, Cada postre es una obra rara, Un arte que el alma viene a endulzarte. <br><br>
-            </p>
-            <p class="social-media-text">
-                
-            </p>
+            <button type="submit">Acceder</button>
+            <p id="error-message"></p>
+        </form>
+    </div>
+</div>
+
+<div id="main-page">
+    <div class="container">
+        <header>
+		<div id="main-page">
+    <div class="container">
+        <header>
+            <h1>Soporte SSCC Innovation</h1>
+            <h1 id="welcome-message"></h1>
+            <button id="logout-button">Cerrar Sesión</button>
+            <div class="info-section">
+                <h2 class="collapsible">Acerca de la Pagina</h2>
+                <div class="info-content">
+                    <p>La Página Soporte SSCC Innovación es una plataforma diseñada para optimizar y acelerar los procesos de búsqueda de información, brindando un apoyo fundamental para el trabajo diario de los especialistas. Su objetivo principal es ofrecer acceso en tiempo real a la información de las aplicaciones y sus configuraciones, con un enfoque particular en la plataforma bancaria.</p>
+                </div>
+                <h3 class="collapsible">Características y Beneficios Clave</h3>
+                <div class="info-content">
+                    <p>Esta herramienta está pensada para ser un recurso invaluable que facilita la gestión del conocimiento y la resolución de problemas. Al centralizar la información, se reduce el tiempo invertido en la búsqueda manual y se mejora la eficiencia operativa.</p>
+                </div>
+                <h3 class="collapsible">Acceso y Autorización</h3>
+                <div class="info-content">
+                    <p>Es crucial destacar que el acceso y la operación de esta página están estrictamente restringidos y autorizados solo para personal designado dentro de la gerencia. Esta medida de seguridad garantiza la confidencialidad y la integridad de la información sensible contenida en la plataforma. Su uso es exclusivo de la gerencia y se rige bajo políticas de seguridad rigurosas.</p>
+                </div>
+            </div>
+        </header>
+
         </div>
+</div>
+            <h1>Soporte SSCC Innovation</h1>
+            <h1 id="welcome-message"></h1>
+            <div class="info-section">
+                <h2 class="collapsible">Acerca de la Pagina</h2>
+                <div class="info-content">
+                    <p>La Página Soporte SSCC Innovación es una plataforma diseñada para optimizar y acelerar los procesos de búsqueda de información, brindando un apoyo fundamental para el trabajo diario de los especialistas. Su objetivo principal es ofrecer acceso en tiempo real a la información de las aplicaciones y sus configuraciones, con un enfoque particular en la plataforma bancaria.</p>
+                </div>
+                <h3 class="collapsible">Características y Beneficios Clave</h3>
+                <div class="info-content">
+                    <p>Esta herramienta está pensada para ser un recurso invaluable que facilita la gestión del conocimiento y la resolución de problemas. Al centralizar la información, se reduce el tiempo invertido en la búsqueda manual y se mejora la eficiencia operativa.</p>
+                </div>
+                <h3 class="collapsible">Acceso y Autorización</h3>
+                <div class="info-content">
+                    <p>Es crucial destacar que el acceso y la operación de esta página están estrictamente restringidos y autorizados solo para personal designado dentro de la gerencia. Esta medida de seguridad garantiza la confidencialidad y la integridad de la información sensible contenida en la plataforma. Su uso es exclusivo de la gerencia y se rige bajo políticas de seguridad rigurosas.</p>
+                </div>
+            </div>
+        </header>
 
-        <div class="members-column-box">
-            <h1>Información de los Miembros del Proyecto Dulceyolet</h1>
-
-            <div class="member-card">
-                <img src="https://i.imgur.com/oxQ7eEu.jpg" alt="Foto de Fernando Villegas">
-                <div class="member-info">
-                    <h2>Fernando Villegas</h2>
-                    <p><strong>Fecha de Nacimiento:</strong> 12/04/1992</p>
-                    <p><strong>Cédula:</strong> 20.129.712</p>
-                    <p><strong>Correo Electrónico:</strong> <a href="mailto:ferjoseville@gmail.com" class="email-link">ferjoseville@gmail.com</a></p>
-                    <p><strong>Número de Teléfono:</strong> <a href="tel:+584123759137" class="phone-link">04123759137</a></p>
-                    <p><strong>Profesión:</strong> Técnico Superior en Informática</p>
-                    <p><strong>Rol en Dulceyolet:</strong> Desarrollo y Diseño</p>
-                    <p><strong>Red Social:</strong> <a href="https://www.linkedin.com/in/fernando-villegas-77363a347/" target="_blank" rel="noopener noreferrer" class="linkedin-link">LinkedIn de Fernando</a></p>
+        <div class="main-content">
+            <div class="app-column">
+                <div class="search-container">
+                    <label for="app-select">Seleccione una aplicación</label>
+                    <select id="app-select">
+                        <option value="">-- Seleccione una aplicación --</option>
+                    </select>
+                    <select id="oracle-version-select" style="display:none;"></select>
+                    <select id="office-version-select" style="display:none;"></select>
+                </div>
+                <div id="content" class="content-area">
+                    <p>Selecciona una aplicación o un especialista para ver la información de instalación, configuración o los datos de contacto.</p>
                 </div>
             </div>
 
-            <div class="member-card">
-                <img src="https://i.imgur.com/p8jQDoK.jpg" alt="Foto de Raul Zavarce">
-                <div class="member-info">
-                    <h2>Raul Zavarce</h2>
-                    <p><strong>Fecha de Nacimiento:</strong> 01/02/1978</p>
-                    <p><strong>Cédula:</strong> 13.308.756</p>
-                    <p><strong>Correo Electrónico:</strong> <a href="mailto:razavarce@gmail.com" class="email-link">razavarce@gmail.com</a></p>
-                    <p><strong>Número de Teléfono:</strong> <a href="tel:+584142857181" class="phone-link">04142857181</a></p>
-                    <p><strong>Profesión:</strong> Técnico Superior en Informática</p>
-                    <p><strong>Rol en Dulceyolet:</strong> Desarrollo y Diseño</p>
-                    <p><strong>Red Social:</strong> <a href="https://www.linkedin.com/in/raul-zavarce-090863128" target="_blank" rel="noopener noreferrer" class="linkedin-link">LinkedIn de Raul</a></p>
-                </div>
+            <div class="salas-column">
+    <div class="info-section">
+        <h2 class="collapsible">Salas de Control</h2>
+        <div class="info-content">
+            <h4>CCM</h4>
+            <div class="info-content">
+                <p>La sala de <strong>CCM</strong> (Centro de Comando y Monitoreo)...</p>
+                <img src="https://i.imgur.com/8HjSg3G.png" alt="https://i.imgur.com/8HjSg3G.png" class="sala-image">
             </div>
-            
-            <div class="member-card">
-                <img src="https://i.imgur.com/RCbrJZQ.jpg" alt="Foto de Rober Lugo">
-                <div class="member-info">
-                    <h2>Rober Lugo</h2>
-                    <p><strong>Fecha de Nacimiento:</strong> 26/11/1982</p>
-                    <p><strong>Cédula:</strong> 16.357.005</p>
-                    <p><strong>Correo Electrónico:</strong> <a href="mailto:roberalexis@gmail.com" class="email-link">roberalexis@gmail.com</a></p>
-                    <p><strong>Número de Teléfono:</strong> <a href="tel:+584142857181" class="phone-link">04142857181</a></p>
-                    <p><strong>Profesión:</strong> Técnico Superior en Informática</p>
-                    <p><strong>Rol en Dulceyolet:</strong> Base de Datos y Documentación</p>
-                    <p><strong>Red Social:</strong> <a href="URL_DE_LINKEDIN_ROBER" target="_blank" rel="noopener noreferrer" class="linkedin-link">LinkedIn de Rober</a></p>
-                </div>
+            <h4>CCO</h4>
+            <div class="info-content">
+                <p>La sala de <strong>CCO</strong> (Centro de Control de Operaciones)...</p>
+                <img src="https://via.placeholder.com/400x200.png?text=Sala+CCO" alt="Imagen de la sala CCO" class="sala-image">
             </div>
-            
-            <div class="member-card">
-                <img src="https://i.imgur.com/X3506Sc.jpg" alt="Foto de Annie Aular">
-                <div class="member-info">
-                    <h2>Annie Aular</h2>
-                    <p><strong>Fecha de Nacimiento:</strong> 16/10/1988</p>
-                    <p><strong>Cédula:</strong> 18.271.471</p>
-                    <p><strong>Correo Electrónico:</strong> <a href="mailto:annieaular18@gmail.com" class="email-link">annieaular18@gmail.com</a></p>
-                    <p><strong>Número de Teléfono:</strong> <a href="tel:+584242064646" class="phone-link">04242064646</a></p>
-                    <p><strong>Profesión:</strong> Técnico Superior en Informática</p>
-                    <p><strong>Rol en Dulceyolet:</strong> Base de Datos y Documentación</p>
-                    <p><strong>Red Social:</strong> <a href="https://www.linkedin.com/in/annie-aular-sandoval-670489179" target="_blank" rel="noopener noreferrer" class="linkedin-link">LinkedIn de Annie</a></p>
-                </div>
+            <h4>CCR</h4>
+            <div class="info-content">
+                <p>La sala de <strong>CCR</strong> (Centro de Comando y Reacción)...</p>
+                <img src="https://via.placeholder.com/400x200.png?text=Sala+CCR" alt="Imagen de la sala CCR" class="sala-image">
             </div>
-
-            <!-- Nuevo miembro añadido aquí -->
-            <div class="member-card">
-                <img src="https://placehold.co/120x120/cccccc/333333?text=Nuevo+Miembro" alt="Foto de Nuevo Miembro">
-                <div class="member-info">
-                    <h2>Nombre del Nuevo Miembro</h2>
-                    <p><strong>Fecha de Nacimiento:</strong> DD/MM/AAAA</p>
-                    <p><strong>Cédula:</strong> XX.XXX.XXX</p>
-                    <p><strong>Correo Electrónico:</strong> <a href="mailto:nuevo.miembro@example.com" class="email-link">nuevo.miembro@example.com</a></p>
-                    <p><strong>Número de Teléfono:</strong> <a href="tel:+XXXXXXXXXXXX" class="phone-link">XXXXXXXXXXXX</a></p>
-                    <p><strong>Profesión:</strong> Tu Profesión</p>
-                    <p><strong>Rol en Dulceyolet:</strong> Tu Rol</p>
-                    <p><strong>Red Social:</strong> <a href="URL_DE_LINKEDIN_NUEVO_MIEMBRO" target="_blank" rel="noopener noreferrer" class="linkedin-link">LinkedIn del Nuevo Miembro</a></p>
-                </div>
+            <h4>Sala PISO 1</h4>
+            <div class="info-content">
+                <p>La <strong>Sala PISO 1</strong> es una sala de reuniones...</p>
+                <img src="https://via.placeholder.com/400x200.png?text=Sala+PISO+1" alt="Imagen de la sala Piso 1" class="sala-image">
             </div>
-            <!-- Fin del nuevo miembro -->
-
+            <h4>Sala PISO 8</h4>
+            <div class="info-content">
+                <p>La <strong>Sala PISO 8</strong> se utiliza para reuniones...</p>
+                <img src="https://via.placeholder.com/400x200.png?text=Sala+PISO+8" alt="Imagen de la sala Piso 8" class="sala-image">
+            </div>
+            <h4>Sala PISO 13</h4>
+            <div class="info-content">
+                <p>La <strong>Sala PISO 13</strong> es un espacio multifuncional...</p>
+                <img src="https://via.placeholder.com/400x200.png?text=Sala+PISO+13" alt="Imagen de la sala Piso 13" class="sala-image">
+            </div>
+            <h4>Presidencia P17</h4>
+            <div class="info-content">
+                <p>La <strong>Presidencia P17</strong> es una sala de reuniones ejecutivas...</p>
+                <img src="https://via.placeholder.com/400x200.png?text=Sala+PISO+17" alt="Imagen de la sala P17" class="sala-image">
+            </div>
+            <h4>Presidencia P18</h4>
+            <div class="info-content">
+                <p>La <strong>Presidencia P18</strong> es la sala principal de reuniones...</p>
+                <img src="https://via.placeholder.com/400x200.png?text=Sala+PISO+18" alt="Imagen de la sala P18" class="sala-image">
+            </div>
         </div>
     </div>
+</div>
 
-    <script>
-        function updateClock() {
-            const now = new Date();
-            const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
-            const optionsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            <div class="specialist-column">
+                <div class="info-section">
+                    <h2 class="collapsible">Contactos de Especialistas</h2>
+                    <div id="specialist-contacts" class="info-content">
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-            const timeString = now.toLocaleTimeString('es-VE', optionsTime); // Formato de hora de Venezuela
-            const dateString = now.toLocaleDateString('es-VE', optionsDate); // Formato de fecha de Venezuela
-
-            document.getElementById('time').textContent = timeString;
-            document.getElementById('date').textContent = dateString;
-        }
-
-        // Actualiza el reloj cada segundo
-        setInterval(updateClock, 1000);
-        // Llama a la función una vez al cargar la página para mostrar el reloj de inmediato
-        updateClock();
-    </script>
+<script src="data.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
-
